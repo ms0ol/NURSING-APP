@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة ملائكة الرحمة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --p: #2c3e50; --a: #27ae60; --bg: #f4f7f6; --card: #ffffff; --txt: #333; --tg: #0088cc; }
+        body.dark { --bg: #121212; --card: #1e1e1e; --txt: #e0e0e0; --p: #34495e; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding-bottom: 80px; transition: 0.3s; }
+        
+        .hero { 
+            height: 30vh; 
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://i.postimg.cc/28yt9Vf2/download-2.jpg');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; 
+        }
+        .logo-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid white; object-fit: cover; margin-bottom: 10px; }
+
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 2000; }
+        .nav-item { border: none; background: none; color: #888; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; flex: 1; }
+        .nav-item.active { color: var(--p); font-weight: bold; }
+        .nav-item i { font-size: 1.3rem; margin-bottom: 4px; }
+
+        .page { display: none; padding: 20px; animation: fadeIn 0.4s; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .section-header { background: var(--p); color: white; padding: 10px 15px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+        .sub-icon-img { width: 35px; height: 35px; border-radius: 50%; background: white; object-fit: contain; padding: 2px; }
+
+        .row-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); align-items: center; gap: 10px; }
+        .btn-link { background: var(--a); color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 0.8rem; font-weight: bold; }
+        .btn-copy { background: #eee; color: #555; border: none; padding: 8px; border-radius: 8px; cursor: pointer; }
+        
+        .tg-btn { display: flex; align-items: center; gap: 10px; background: var(--tg); color: white; padding: 12px; border-radius: 12px; text-decoration: none; margin-bottom: 10px; font-weight: bold; transition: 0.2s; }
+        .tg-btn:active { transform: scale(0.98); }
+        
+        .sub-tags { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 10px; scrollbar-width: none; }
+        .tag { background: #eee; padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; white-space: nowrap; cursor: pointer; border: none; }
+        
+        .calc-box { background: #f9f9f9; padding: 15px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 10px; }
+        input, textarea { padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px; width: 100%; box-sizing: border-box; font-family: inherit; }
+    </style>
+</head>
+<body>
+
+    <div id="home" class="page active">
+        <section class="hero">
+            <img src="https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg" class="logo-img">
+            <h3 style="margin:0;">منصة ملائكة الرحمة</h3>
+            <p style="font-size: 0.8rem; opacity: 0.9;">بإشراف: مصطفى جبار</p>
+        </section>
+        
+        <div class="card" style="margin-top: -20px; border-right: 5px solid #e74c3c; background: #fff5f5;">
+            <h4 style="margin:0; color:#e74c3c;"><i class="fas fa-bullhorn"></i> تبليغ هام</h4>
+            <p style="font-weight: bold; margin: 5px 0;">" شدوا حيلكم الاسبوع الجاي عباره عن امتحانات "</p>
+        </div>
+
+        <div class="card">
+            <h4><i class="fas fa-edit"></i> مفكرة الممرض (ملاحظاتك)</h4>
+            <textarea id="userNote" rows="4" placeholder="اكتب مهامك الدراسية أو نواقصك هنا..."></textarea>
+            <button onclick="saveNote()" style="width:100%; background:var(--a); color:white; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer;">حفظ في الذاكرة ✅</button>
+        </div>
+
+        <div class="card">
+            <h4>👨‍💻 المطور</h4>
+            <a href="https://t.me/ms0oll" class="tg-btn" style="background: var(--p);">
+                <i class="fas fa-user"></i> تواصل مع مصطفى جبار
+            </a>
+        </div>
+    </div>
+
+    <div id="lectures" class="page">
+        <h3>📚 المحاضرات</h3>
+        <div class="sub-tags" id="subTags"></div>
+        <div id="lecturesList">جاري التحميل...</div>
+    </div>
+
+    <div id="exams" class="page">
+        <h3>📝 جدول الامتحانات</h3>
+        <div id="examsList">جاري التحميل...</div>
+    </div>
+
+    <div id="calculator" class="page">
+        <h3>🧮 الحاسبة (40+60)</h3>
+        <div class="card">
+            <div id="subjectsList">
+                <div class="calc-box">
+                    <input type="text" placeholder="اسم المادة" style="font-weight:bold;">
+                    <div style="display:flex; gap:5px;">
+                        <input type="number" placeholder="نظري(25)" class="nt">
+                        <input type="number" placeholder="عملي(10)" class="pr">
+                        <input type="number" placeholder="يومي(5)" class="dy">
+                    </div>
+                    <input type="number" placeholder="درجة الفاينل (60)" class="fn" style="border:1.5px solid var(--a)">
+                    <p class="res-badge" style="text-align:center; font-weight:bold; color:var(--p); margin:0;"></p>
+                </div>
+            </div>
+            <button onclick="addNewSubject()" style="background:none; border:1px dashed #aaa; width:100%; padding:10px; border-radius:10px; margin-bottom:10px;">+ مادة إضافية</button>
+            <button onclick="calculateAll()" style="width:100%; background:var(--p); color:white; border:none; padding:15px; border-radius:12px; font-weight:bold;">احسب النتيجة</button>
+            <div id="finalRes" style="display:none; text-align:center; margin-top:15px;">
+                <h1 id="gpaVal" style="color:var(--a); margin:0;">0%</h1>
+                <p id="gpaStatus"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings" class="page">
+        <h3>🔗 القنوات والجروبات</h3>
+        
+        <div class="card" style="border-right: 5px solid var(--a);">
+            <h4 style="color:var(--a);">🔝 الجروبات الرسمية للمرحلة</h4>
+            <a href="https://t.me/+qlol3SKFZpk0ZDli" target="_blank" class="tg-btn"><i class="fab fa-telegram"></i> الجروب الرسمي - المرحلة الأولى</a>
+            <a href="https://t.me/+5gRfqqpnkzwzODJi" target="_blank" class="tg-btn" style="background:#2ecc71;"><i class="fas fa-dna"></i> جروب مادة الأحياء الرسمي</a>
+        </div>
+
+        <div class="card">
+            <h4>📁 التبليغات والملفات</h4>
+            <a href="https://t.me/alialakbar2005" target="_blank" class="tg-btn" style="background:#6c757d;"><i class="fas fa-folder-open"></i> جروب الملفات (الممرضين)</a>
+            <a href="https://t.me/txt7ll" target="_blank" class="tg-btn" style="background:#e67e22;"><i class="fas fa-bullhorn"></i> تبليغات المجموعة الخامسة</a>
+        </div>
+
+        <div class="card">
+            <h4>🛠️ إعدادات التطبيق</h4>
+            <button onclick="document.body.classList.toggle('dark')" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd; background:none; color:inherit; cursor:pointer;">تبديل الوضع الليلي 🌙</button>
+        </div>
+    </div>
+
+    <nav class="nav-bar">
+        <button class="nav-item active" onclick="showPage('home')"><i class="fas fa-home"></i>الرئيسية</button>
+        <button class="nav-item" onclick="showPage('lectures')"><i class="fas fa-book"></i>المحاضرات</button>
+        <button class="nav-item" onclick="showPage('exams')"><i class="fas fa-calendar-alt"></i>الامتحانات</button>
+        <button class="nav-item" onclick="showPage('calculator')"><i class="fas fa-calculator"></i>المعدل</button>
+        <button class="nav-item" onclick="showPage('settings')"><i class="fas fa-link"></i>القنوات</button>
+    </nav>
+
+    <script>
+        const sheetID = "1_fAReJybGj_tZ80LslShuLnERAAliJXqhEhNtsk_pGg";
+
+        const subjectIcons = {
+            "تشريح": "https://i.postimg.cc/90RGZ3vm/Ilustración_Médica_Del_Cráneo_Y_El_Sistema_Vascular_PNG_dibujos_Cráneo_Anatómico_Anatomية_الحمراء.jpg",
+            "كيمياء": "https://i.postimg.cc/ydrmD6rg/download-4.jpg",
+            "اسس تمريض": "https://i.postimg.cc/CL52rzVv/download-3.jpg",
+            "أخرى": "https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg"
+        };
+
+        function showPage(p) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.getElementById(p).classList.add('active');
+            event.currentTarget.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        // حفظ الملاحظات
+        function saveNote() {
+            localStorage.setItem('nurseNote', document.getElementById('userNote').value);
+            alert("تم حفظ ملاحظاتك بنجاح ✅");
+        }
+        document.getElementById('userNote').value = localStorage.getItem('nurseNote') || "";
+
+        async function init() {
+            try {
+                const [rLec, rEx] = await Promise.all([
+                    fetch(`https://opensheet.elk.sh/${sheetID}/ورقة1`),
+                    fetch(`https://opensheet.elk.sh/${sheetID}/exams`)
+                ]);
+                renderLecs(await rLec.json());
+                renderExams(await rEx.json());
+            } catch(e) { console.error("Data Error"); }
+        }
+
+        function renderLecs(data) {
+            const list = document.getElementById("lecturesList");
+            const tags = document.getElementById("subTags");
+            list.innerHTML = ""; tags.innerHTML = "";
+            const grouped = data.reduce((acc, row) => {
+                const s = row.المادة || "أخرى";
+                if (!acc[s]) acc[s] = [];
+                acc[s].push(row); return acc;
+            }, {});
+
+            for (const sub in grouped) {
+                const tag = document.createElement("button");
+                tag.className = "tag"; tag.innerText = sub;
+                tag.onclick = () => document.getElementById('sec-'+sub).scrollIntoView({behavior:"smooth"});
+                tags.appendChild(tag);
+
+                const icon = subjectIcons[sub] || subjectIcons["أخرى"];
+                let html = `<div class="card" id="sec-${sub}">
+                    <div class="section-header"><img src="${icon}" class="sub-icon-img"><b>${sub}</b></div>`;
+                grouped[sub].forEach(l => {
+                    html += `<div class="row-item">
+                        <span style="flex:1;">${l.المحاضرة}</span>
+                        <div style="display:flex; gap:5px;">
+                            <button class="btn-copy" onclick="copyLink('${l.الموقع}')" title="نسخ الرابط"><i class="fas fa-share-alt"></i></button>
+                            <a href="${l.الموقع}" target="_blank" class="btn-link">فتح</a>
+                        </div>
+                    </div>`;
+                });
+                list.innerHTML += html + "</div>";
+            }
+        }
+
+        function copyLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert("تم نسخ رابط المحاضرة بنجاح 🔗");
+            });
+        }
+
+        function renderExams(data) {
+            const list = document.getElementById("examsList");
+            list.innerHTML = "";
+            data.forEach(ex => {
+                const icon = subjectIcons[ex.المادة] || subjectIcons["أخرى"];
+                list.innerHTML += `<div class="card" style="border-right:5px solid var(--p)">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <img src="${icon}" style="width:25px; height:25px; border-radius:50%;">
+                        <b>${ex.المادة}</b>
+                    </div>
+                    <small>📅 التاريخ: ${ex.التاريخ} | النوع: ${ex['نوع الامتحان']}</small>
+                </div>`;
+            });
+        }
+
+        function addNewSubject() {
+            const box = document.querySelector('.calc-box').cloneNode(true);
+            box.querySelectorAll('input').forEach(i => i.value = "");
+            box.querySelector('.res-badge').innerText = "";
+            document.getElementById('subjectsList').appendChild(box);
+        }
+
+        function calculateAll() {
+            let total = 0, count = 0;
+            document.querySelectorAll('.calc-box').forEach(box => {
+                const nt = parseFloat(box.querySelector('.nt').value) || 0;
+                const pr = parseFloat(box.querySelector('.pr').value) || 0;
+                const dy = parseFloat(box.querySelector('.dy').value) || 0;
+                const fn = parseFloat(box.querySelector('.fn').value) || 0;
+                const sum = nt + pr + dy + fn;
+                box.querySelector('.res-badge').innerText = `المجموع الكلي: ${sum}/100`;
+                if((nt+pr+dy) > 0 || fn > 0) { total += sum; count++; }
+            });
+            if(count > 0) {
+                const gpa = (total / count).toFixed(2);
+                document.getElementById('finalRes').style.display = 'block';
+                document.getElementById('gpaVal').innerText = gpa + "%";
+                document.getElementById('gpaStatus').innerText = gpa >= 50 ? "ناجح ✨" : "راسب ❌";
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
