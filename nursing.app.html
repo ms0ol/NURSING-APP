@@ -9,7 +9,6 @@
         :root { --p: #2c3e50; --a: #27ae60; --bg: #f4f7f6; --card: #ffffff; --txt: #333; --tg: #0088cc; }
         body.dark { --bg: #121212; --card: #1e1e1e; --txt: #e0e0e0; --p: #34495e; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding-bottom: 80px; transition: 0.3s; }
-        
         .hero { 
             height: 30vh; 
             background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://i.postimg.cc/28yt9Vf2/download-2.jpg');
@@ -18,30 +17,23 @@
             color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; 
         }
         .logo-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid white; object-fit: cover; margin-bottom: 10px; }
-
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 2000; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 20; }
         .nav-item { border: none; background: none; color: #888; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; flex: 1; }
         .nav-item.active { color: var(--p); font-weight: bold; }
         .nav-item i { font-size: 1.3rem; margin-bottom: 4px; }
-
         .page { display: none; padding: 20px; animation: fadeIn 0.4s; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         .card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .section-header { background: var(--p); color: white; padding: 10px 15px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
         .sub-icon-img { width: 35px; height: 35px; border-radius: 50%; background: white; object-fit: contain; padding: 2px; }
-
         .row-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); align-items: center; gap: 10px; }
         .btn-link { background: var(--a); color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 0.8rem; font-weight: bold; }
         .btn-copy { background: #eee; color: #555; border: none; padding: 8px; border-radius: 8px; cursor: pointer; }
-        
-        .tg-btn { display: flex; align-items: center; gap: 10px; background: var(--tg); color: white; padding: 12px; border-radius: 12px; text-decoration: none; margin-bottom: 10px; font-weight: bold; transition: 0.2s; }
+        .tg-btn { display: flex; align-items: center; gap: 10px; background: var(--tg); color: white; padding: 12px; border-radius: 12px; text-decoration: none; margin-bottom: 10px; font-weight: bold; }
         .tg-btn:active { transform: scale(0.98); }
-        
         .sub-tags { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 10px; scrollbar-width: none; }
         .tag { background: #eee; padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; white-space: nowrap; cursor: pointer; border: none; }
-        
         .calc-box { background: #f9f9f9; padding: 15px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 10px; }
         input, textarea { padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px; width: 100%; box-sizing: border-box; font-family: inherit; }
     </style>
@@ -63,7 +55,7 @@
         <div class="card">
             <h4><i class="fas fa-edit"></i> مفكرة الممرض (ملاحظاتك)</h4>
             <textarea id="userNote" rows="4" placeholder="اكتب مهامك الدراسية أو نواقصك هنا..."></textarea>
-            <button onclick="saveNote()" style="width:100%; background:var(--a); color:white; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer;">حفظ في الذاكرة ✅</button>
+            <button onclick="saveNote()" style="width:100%; background:var(--a); color:white; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer;">حفظ في الذاكرة</button>
         </div>
 
         <div class="card">
@@ -126,16 +118,16 @@
 
         <div class="card">
             <h4>🛠️ إعدادات التطبيق</h4>
-            <button onclick="document.body.classList.toggle('dark')" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd; background:none; color:inherit; cursor:pointer;">تبديل الوضع الليلي 🌙</button>
+            <button onclick="document.body.classList.toggle('dark')" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd; background:none; color:inherit; cursor:pointer;">تبديل الثيم</button>
         </div>
     </div>
 
     <nav class="nav-bar">
-        <button class="nav-item active" onclick="showPage('home')"><i class="fas fa-home"></i>الرئيسية</button>
-        <button class="nav-item" onclick="showPage('lectures')"><i class="fas fa-book"></i>المحاضرات</button>
-        <button class="nav-item" onclick="showPage('exams')"><i class="fas fa-calendar-alt"></i>الامتحانات</button>
-        <button class="nav-item" onclick="showPage('calculator')"><i class="fas fa-calculator"></i>المعدل</button>
-        <button class="nav-item" onclick="showPage('settings')"><i class="fas fa-link"></i>القنوات</button>
+        <button class="nav-item active" onclick="showPage('home', this)"><i class="fas fa-home"></i>الرئيسية</button>
+        <button class="nav-item" onclick="showPage('lectures', this)"><i class="fas fa-book"></i>المحاضرات</button>
+        <button class="nav-item" onclick="showPage('exams', this)"><i class="fas fa-calendar-alt"></i>الامتحانات</button>
+        <button class="nav-item" onclick="showPage('calculator', this)"><i class="fas fa-calculator"></i>المعدل</button>
+        <button class="nav-item" onclick="showPage('settings', this)"><i class="fas fa-link"></i>القنوات</button>
     </nav>
 
     <script>
@@ -148,11 +140,12 @@
             "أخرى": "https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg"
         };
 
-        function showPage(p) {
+        function showPage(p, btn) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            document.getElementById(p).classList.add('active');
-            event.currentTarget.classList.add('active');
+            const el = document.getElementById(p);
+            if (el) el.classList.add('active');
+            if (btn && btn.classList) btn.classList.add('active');
             window.scrollTo(0,0);
         }
 
@@ -171,7 +164,7 @@
                 ]);
                 renderLecs(await rLec.json());
                 renderExams(await rEx.json());
-            } catch(e) { console.error("Data Error"); }
+            } catch(e) { console.error("Data Error", e); document.getElementById("lecturesList").innerText = "فشل تحميل المحاضرات"; document.getElementById("examsList").innerText = "فشل تحميل الامتحانات"; }
         }
 
         function renderLecs(data) {
@@ -194,11 +187,13 @@
                 let html = `<div class="card" id="sec-${sub}">
                     <div class="section-header"><img src="${icon}" class="sub-icon-img"><b>${sub}</b></div>`;
                 grouped[sub].forEach(l => {
+                    const link = l.الموقع || "#";
+                    const title = l.المحاضرة || "محاضرة";
                     html += `<div class="row-item">
-                        <span style="flex:1;">${l.المحاضرة}</span>
+                        <span style="flex:1;">${title}</span>
                         <div style="display:flex; gap:5px;">
-                            <button class="btn-copy" onclick="copyLink('${l.الموقع}')" title="نسخ الرابط"><i class="fas fa-share-alt"></i></button>
-                            <a href="${l.الموقع}" target="_blank" class="btn-link">فتح</a>
+                            <button class="btn-copy" onclick="copyLink('${link}')" title="نسخ الرابط"><i class="fas fa-share-alt"></i></button>
+                            <a href="${link}" target="_blank" class="btn-link">فتح</a>
                         </div>
                     </div>`;
                 });
@@ -206,10 +201,14 @@
             }
         }
 
-        function copyLink(url) {
-            navigator.clipboard.writeText(url).then(() => {
+        async function copyLink(url) {
+            try {
+                await navigator.clipboard.writeText(url);
                 alert("تم نسخ رابط المحاضرة بنجاح 🔗");
-            });
+            } catch (err) {
+                // fallback: show the url so user ينسخ يدوياً
+                prompt("انسخ الرابط يدوياً:", url);
+            }
         }
 
         function renderExams(data) {
@@ -222,7 +221,7 @@
                         <img src="${icon}" style="width:25px; height:25px; border-radius:50%;">
                         <b>${ex.المادة}</b>
                     </div>
-                    <small>📅 التاريخ: ${ex.التاريخ} | النوع: ${ex['نوع الامتحان']}</small>
+                    <small>📅 التاريخ: ${ex.التاريخ} | النوع: ${ex['نوع الامتحان'] || ''}</small>
                 </div>`;
             });
         }
