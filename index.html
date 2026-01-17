@@ -11,26 +11,28 @@
     <meta name="theme-color" content="#2c3e50">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg">
 
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "c203fd64-b856-407e-a1b4-1212f35b76d6",
-    });
-  });
-</script>
-          notifyButton: { 
-            enable: true,
-            size: 'medium',
-            position: 'bottom-left',
-            colors: { 'circle.background': '#27ae60' }
-          },
-          welcomeNotification: {
-            title: "أوكسجين التمريض",
-            message: "شكراً لتفعيل الإشعارات! ستصلك التبليغات هنا فوراً.",
-          }
-        });
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      // OneSignal initialization (منسق بشكل صحيح)
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        try {
+          await OneSignal.init({
+            appId: "c203fd64-b856-407e-a1b4-1212f35b76d6",
+            notifyButton: { 
+              enable: true,
+              size: 'medium',
+              position: 'bottom-left',
+              colors: { 'circle.background': '#27ae60' }
+            },
+            welcomeNotification: {
+              title: "أوكسجين التمريض",
+              message: "شكراً لتفعيل الإشعارات! ستصلك التبليغات هنا فوراً."
+            }
+          });
+        } catch (err) {
+          console.warn("OneSignal init error:", err);
+        }
       });
     </script>
 
@@ -42,13 +44,13 @@
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding-bottom: 90px; transition: 0.3s; scroll-behavior: smooth; overflow-x: hidden; }
         
         /* تحسين الهيدر واللوجو */
-        .hero { height: 26vh; background: linear-gradient(rgba(44,62,80,0.85), rgba(44,62,80,0.85)), url('https://i.postimg.cc/28yt9Vf2/download-2.jpg'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; position: relative; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .hero { height: 26vh; background: linear-gradient(rgba(44,62,80,0.85), rgba(44,62,80,0.85)), url('https://i.postimg.cc/28yt9Vf2/download-2.jpg'); background-size: cover; background-position: center; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; position:relative; gap:6px; padding-top:10px; }
         .logo-img { width: 75px; height: 75px; border-radius: 50%; border: 3px solid white; margin-bottom: 8px; object-fit: cover; background: white; }
-        .quote { font-size: 0.8rem; font-style: italic; opacity: 0.9; max-width: 85%; margin-top: 5px; color: #d1d8e0; line-height: 1.4; }
-        .dark-toggle { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(5px); }
+        .quote { font-size: 0.8rem; font-style: italic; opacity: 0.9; max-width: 85%; margin-top: 5px; color: #d1d8e0; line-height: 1.4; text-align:center; }
+        .dark-toggle { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(4px); }
 
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -3px 15px rgba(0,0,0,0.1); z-index: 2000; border-top-left-radius: 20px; border-top-right-radius: 20px; }
-        .nav-item { border: none; background: none; color: #888; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; flex: 1; cursor: pointer; transition: 0.2s; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -3px 15px rgba(0,0,0,0.1); z-index: 200; gap:4px; }
+        .nav-item { border: none; background: none; color: #888; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; flex: 1; cursor: pointer; transition: 0.2s; padding:4px 6px; }
         .nav-item.active { color: var(--a); font-weight: bold; transform: translateY(-3px); }
         .nav-item i { font-size: 1.2rem; margin-bottom: 4px; }
 
@@ -65,13 +67,13 @@
         .ad-meta { font-size: 0.7rem; color: #888; margin-bottom: 5px; display: block; font-weight: bold; }
 
         .shortcuts-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 12px; scrollbar-width: none; }
-        .shortcut-item { background: var(--p); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.75rem; white-space: nowrap; text-decoration: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .shortcut-item { background: var(--p); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.75rem; white-space: nowrap; text-decoration: none; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display:inline-flex; align-items:center; gap:8px; }
         
         .row-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f1f1; align-items: center; font-size: 0.9rem; }
         .btn-link { background: var(--a); color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 0.8rem; font-weight: bold; }
         .btn-copy { background: #f0f0f0; border: none; padding: 8px; border-radius: 8px; color: #555; cursor: pointer; }
 
-        .tg-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--tg); color: white; padding: 12px; border-radius: 12px; text-decoration: none; margin-bottom: 8px; font-size: 0.9rem; font-weight: bold; transition: 0.2s; }
+        .tg-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--tg); color: white; padding: 12px; border-radius: 12px; text-decoration: none; margin-bottom: 8px; }
         .tg-btn:active { transform: scale(0.98); }
         
         input, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 10px; background: var(--card); color: var(--txt); box-sizing: border-box; }
@@ -148,11 +150,11 @@
     </div>
 
     <nav class="nav-bar">
-        <button class="nav-item active" onclick="showPage('home')"><i class="fas fa-home"></i>الرئيسية</button>
-        <button class="nav-item" onclick="showPage('ads')"><i class="fas fa-bullhorn"></i>إعلانات</button>
-        <button class="nav-item" onclick="showPage('lectures')"><i class="fas fa-book-open"></i>محاضرات</button>
-        <button class="nav-item" onclick="showPage('group5')"><i class="fas fa-users"></i>جروب 5</button>
-        <button class="nav-item" onclick="showPage('tools')"><i class="fas fa-tools"></i>أدوات</button>
+        <button class="nav-item active" onclick="showPage('home', event)"><i class="fas fa-home"></i>الرئيسية</button>
+        <button class="nav-item" onclick="showPage('ads', event)"><i class="fas fa-bullhorn"></i>إعلانات</button>
+        <button class="nav-item" onclick="showPage('lectures', event)"><i class="fas fa-book-open"></i>محاضرات</button>
+        <button class="nav-item" onclick="showPage('group5', event)"><i class="fas fa-users"></i>جروب 5</button>
+        <button class="nav-item" onclick="showPage('tools', event)"><i class="fas fa-tools"></i>أدوات</button>
     </nav>
 
     <script>
@@ -164,11 +166,12 @@
         }
         if(localStorage.getItem('oxDarkMode') === 'true') toggleDark();
 
-        function showPage(p) {
+        function showPage(p, ev) {
             document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(ni => ni.classList.remove('active'));
-            document.getElementById(p).classList.add('active');
-            event.currentTarget.classList.add('active');
+            const pageEl = document.getElementById(p);
+            if(pageEl) pageEl.classList.add('active');
+            if(ev && ev.currentTarget) ev.currentTarget.classList.add('active');
             window.scrollTo(0,0);
         }
 
@@ -185,16 +188,17 @@
                 renderAdmins(updatesData);
                 renderSchedule(await rSch.json());
                 renderLecs(await rLec.json());
-            } catch(e) { console.error("Connection Error"); }
+            } catch(e) { console.error("Connection Error", e); }
         }
 
         function renderFeed(data) {
             const adsFeed = document.getElementById('ads-feed');
             const g5Feed = document.getElementById('g5-feed');
+            if (!adsFeed || !g5Feed) return;
             adsFeed.innerHTML = ""; g5Feed.innerHTML = "";
             data.forEach((row, i) => {
-                let gen = row.general_news || Object.values(row)[0];
-                let g5 = row.group5_tasks || Object.values(row)[1];
+                let gen = row.general_news || row['التبليغ'] || Object.values(row)[0];
+                let g5 = row.group5_tasks || row['group5'] || Object.values(row)[1];
                 if(gen) adsFeed.innerHTML += `<div class="ad-item"><span class="ad-meta">تبليغ #${data.length - i}</span>${gen}</div>`;
                 if(g5) g5Feed.innerHTML += `<div class="ad-item" style="border-right-color:#e67e22;"><span class="ad-meta">تنبيه لجروب 5</span>${g5}</div>`;
             });
@@ -202,84 +206,140 @@
 
         function renderAdmins(data) {
             const container = document.getElementById('admin-links');
+            if (!container) return;
             container.innerHTML = "";
             data.forEach(row => {
                 const val = Object.values(row);
-                if(val[2] && val[3] && val[2].includes('http')) {
+                // نفترض أن العمودين الثالث والرابع يحتويان على رابط واسم المسؤول
+                if(val[2] && val[3] && typeof val[2] === 'string' && val[2].includes('http')) {
                     container.innerHTML += `<a href="${val[2]}" target="_blank" class="tg-btn" style="background:#34495e;"><i class="fas fa-user-md"></i> ${val[3]}</a>`;
                 }
             });
+            if(container.innerHTML.trim() === "") container.innerHTML = "<small>لا توجد روابط حالياً.</small>";
         }
 
         function renderSchedule(data) {
             const container = document.getElementById('schedule-grid');
+            if (!container) return;
             container.innerHTML = "";
             const grouped = data.reduce((acc, row) => {
-                let day = row.اليوم || row["اليوم"];
+                let day = row.اليوم || row["اليوم"] || row.day || "غير محدد";
                 if(!acc[day]) acc[day] = [];
                 acc[day].push(row); return acc;
             }, {});
 
-            for(const day in grouped) {
-                if(day === "undefined") continue;
+            Object.keys(grouped).forEach(day => {
+                if(day === "undefined") return;
                 let html = `<div class="day-mini-card"><span class="day-n">${day}</span>`;
                 grouped[day].forEach(item => {
-                    let timeVal = item.الوقت || item[" الوقت"] || "غير محدد";
-                    html += `<div style="font-size:0.8rem; margin-bottom:8px; border-bottom:1px solid rgba(0,0,0,0.05);">
-                        <div style="font-weight:bold; color:var(--p);">${item.المادة}</div>
+                    let timeVal = item.الوقت || item[" الوقت"] || item.time || "غير محدد";
+                    let subject = item.المادة || item.subject || "مادة غير معروفة";
+                    let room = item.القاعة || item.room || '';
+                    html += `<div style="font-size:0.8rem; margin-bottom:8px; border-bottom:1px solid rgba(0,0,0,0.05); padding-bottom:6px;'>
+                        <div style="font-weight:bold; color:var(--p);">${escapeHtml(subject)}</div>
                         <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:#888;">
-                            <span><i class="far fa-clock"></i> ${timeVal}</span><span>${item.القاعة || ''}</span>
+                            <span><i class="far fa-clock"></i> ${escapeHtml(timeVal)}</span><span>${escapeHtml(room)}</span>
                         </div>
                     </div>`;
                 });
                 container.innerHTML += html + `</div>`;
-            }
+            });
         }
 
         function renderLecs(data) {
             const list = document.getElementById("lecturesList");
             const shortcuts = document.getElementById("shortcuts-list");
+            if(!list || !shortcuts) return;
             list.innerHTML = ""; shortcuts.innerHTML = "";
             const grouped = data.reduce((acc, row) => {
-                const s = row.المادة || "أخرى";
+                const s = row.المادة || row.subject || "أخرى";
                 if (!acc[s]) acc[s] = [];
                 acc[s].push(row); return acc;
             }, {});
 
             for (const sub in grouped) {
-                const subID = "sub-" + sub.replace(/\s+/g, '-');
-                shortcuts.innerHTML += `<a href="#${subID}" class="shortcut-item">${sub}</a>`;
-                let html = `<div class="card" id="${subID}"><div style="background:var(--p); color:white; padding:10px; border-radius:10px; font-weight:bold; margin-bottom:10px; font-size:0.95rem;">${sub}</div>`;
+                const safeId = ("sub-" + sub).replace(/[^
+\w\-]+/g, '-');
+                shortcuts.innerHTML += `<a href="#${safeId}" class="shortcut-item">${escapeHtml(sub)}</a>`;
+                let html = `<div class="card" id="${safeId}"><div style="background:var(--p); color:white; padding:10px; border-radius:10px; font-weight:bold; margin-bottom:10px; font-size:0.95rem;">${escapeHtml(sub)}</div><div>`;
                 grouped[sub].forEach(l => {
-                    html += `<div class="row-item"><span>${l.المحاضرة}</span><div style="display:flex; gap:8px;"><button class="btn-copy" onclick="copyLink('${l.الموقع}')"><i class="fas fa-copy"></i></button><a href="${l.الموقع}" target="_blank" class="btn-link">فتح</a></div></div>`;
+                    const title = l.المحاضرة || l.title || 'محاضرة';
+                    const url = l.الموقع || l.url || '';
+                    html += `<div class="row-item"><span>${escapeHtml(title)}</span>
+                        <div style="display:flex; gap:8px;">
+                        ${url ? `<a class="btn-link" href="${url}" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>` : ''}
+                        <button class="btn-copy" onclick="copyLink('${escapeAttr(url)}')"><i class="fas fa-copy"></i></button>
+                        </div></div>`;
                 });
-                list.innerHTML += html + "</div>";
+                list.innerHTML += html + "</div></div>";
             }
         }
 
-        function saveNote() { localStorage.setItem('oxNote', document.getElementById('userNote').value); alert("تم حفظ ملاحظتك بنجاح ✅"); }
-        document.getElementById('userNote').value = localStorage.getItem('oxNote') || "";
-        function copyLink(url) { navigator.clipboard.writeText(url).then(() => alert("تم نسخ الرابط! 🔗")); }
+        function saveNote() { 
+            const el = document.getElementById('userNote');
+            if(!el) return;
+            localStorage.setItem('oxNote', el.value);
+            alert("تم حفظ ملاحظتك بنجاح ✅");
+        }
+        // تأكد من تحميل قيمة الملاحظة بعد تعريف العنصر
+        try {
+            const noteEl = document.getElementById('userNote');
+            if(noteEl) noteEl.value = localStorage.getItem('oxNote') || "";
+        } catch(e) { /* ignore */ }
+
+        function copyLink(url) { 
+            if(!url) { alert("لا يوجد رابط لنسخه."); return; }
+            if(navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => alert("تم نسخ الرابط! 🔗")).catch(() => fallbackCopy(url));
+            } else {
+                fallbackCopy(url);
+            }
+        }
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); alert("تم نسخ الرابط! 🔗"); } catch(e) { prompt("انسخ الرابط يدوياً:", text); }
+            ta.remove();
+        }
         
         function calcSuccess() {
-            const s1 = (parseFloat(document.getElementById('nt').value)||0) + (parseFloat(document.getElementById('pr').value)||0) + (parseFloat(document.getElementById('dy').value)||0);
-            const fn = document.getElementById('fn').value;
+            const nt = parseFloat(document.getElementById('nt').value) || 0;
+            const pr = parseFloat(document.getElementById('pr').value) || 0;
+            const dy = parseFloat(document.getElementById('dy').value) || 0;
+            const s1 = nt + pr + dy;
+            const fnVal = document.getElementById('fn').value;
             document.getElementById('resBox').style.display = 'block';
-            if(fn === "") {
+            if(fnVal === "") {
                 const needed = 50 - s1;
                 document.getElementById('totalRes').innerText = `سعيك الحالي: ${s1.toFixed(1)} / 40`;
                 document.getElementById('neededRes').innerText = needed > 0 ? `تحتاج ${needed.toFixed(1)} في الفاينل للنجاح.` : "أنت ناجح بالسعي! 🔥";
             } else {
-                const total = s1 + parseFloat(fn);
+                const total = s1 + (parseFloat(fnVal) || 0);
                 document.getElementById('totalRes').innerText = `المجموع: ${total.toFixed(1)} %`;
                 document.getElementById('neededRes').innerText = total >= 50 ? "النتيجة: ناجح ✨" : "النتيجة: راسب ❌";
             }
         }
+
+        // مساعدة لتفادي XSS عند إدراج نص من جداول خارجية
+        function escapeHtml(str) {
+            if (!str && str !== 0) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+        function escapeAttr(str) {
+            if(!str) return '';
+            return String(str).replace(/'/g, "\\'");
+        }
+
+        // ابدأ التحميل
         init();
     </script>
 </body>
 
 </html>
-
-
-
