@@ -2,182 +2,241 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة ملائكة الرحمة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Oxygen | أوكسجين</title>
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#2c3e50">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg">
+
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "ضع_هنا_كود_APP_ID_الخاص_بك",
+          notifyButton: { 
+            enable: true,
+            size: 'medium',
+            position: 'bottom-left',
+            colors: { 'circle.background': '#27ae60' }
+          },
+          welcomeNotification: {
+            title: "أوكسجين التمريض",
+            message: "شكراً لتفعيل الإشعارات! ستصلك التبليغات هنا فوراً.",
+          }
+        });
+      });
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --p: #2c3e50; --a: #27ae60; --bg: #f4f7f6; --card: #ffffff; --txt: #333; --tg: #0088cc; }
-        body.dark { --bg: #121212; --card: #1e1e1e; --txt: #e0e0e0; --p: #34495e; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding-bottom: 80px; transition: 0.3s; }
+        body.dark-mode { --bg: #121212; --card: #1e1e1e; --txt: #e0e0e0; --p: #34495e; }
         
-        .hero { 
-            height: 30vh; 
-            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://i.postimg.cc/28yt9Vf2/download-2.jpg');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; 
-        }
-        .logo-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid white; object-fit: cover; margin-bottom: 10px; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--txt); margin: 0; padding-bottom: 90px; transition: 0.3s; scroll-behavior: smooth; overflow-x: hidden; }
+        
+        /* تحسين الهيدر واللوجو */
+        .hero { height: 26vh; background: linear-gradient(rgba(44,62,80,0.85), rgba(44,62,80,0.85)), url('https://i.postimg.cc/28yt9Vf2/download-2.jpg'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; position: relative; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .logo-img { width: 75px; height: 75px; border-radius: 50%; border: 3px solid white; margin-bottom: 8px; object-fit: cover; background: white; }
+        .quote { font-size: 0.8rem; font-style: italic; opacity: 0.9; max-width: 85%; margin-top: 5px; color: #d1d8e0; line-height: 1.4; }
+        .dark-toggle { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(5px); }
 
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 2000; }
-        .nav-item { border: none; background: none; color: #888; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; flex: 1; }
-        .nav-item.active { color: var(--p); font-weight: bold; }
-        .nav-item i { font-size: 1.3rem; margin-bottom: 4px; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -3px 15px rgba(0,0,0,0.1); z-index: 2000; border-top-left-radius: 20px; border-top-right-radius: 20px; }
+        .nav-item { border: none; background: none; color: #888; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; flex: 1; cursor: pointer; transition: 0.2s; }
+        .nav-item.active { color: var(--a); font-weight: bold; transform: translateY(-3px); }
+        .nav-item i { font-size: 1.2rem; margin-bottom: 4px; }
 
-        .page { display: none; padding: 20px; animation: fadeIn 0.4s; }
+        .page { display: none; padding: 15px; animation: slideUp 0.4s ease-out; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .section-header { background: var(--p); color: white; padding: 10px 15px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
-        .sub-icon-img { width: 35px; height: 35px; border-radius: 50%; background: white; object-fit: contain; padding: 2px; }
-
-        .row-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); align-items: center; gap: 10px; }
-        .btn-link { background: var(--a); color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 0.8rem; font-weight: bold; }
-        .btn-copy { background: #eee; color: #555; border: none; padding: 8px; border-radius: 8px; cursor: pointer; }
+        .card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.02); }
+        .schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; }
+        .day-mini-card { border-top: 4px solid var(--a); background: rgba(0,0,0,0.02); padding: 10px; border-radius: 10px; }
+        .day-n { font-weight: bold; font-size: 0.9rem; color: var(--a); display: block; text-align: center; border-bottom: 1px solid #ddd; margin-bottom: 8px; padding-bottom: 4px; }
         
-        .tg-btn { display: flex; align-items: center; gap: 10px; background: var(--tg); color: white; padding: 12px; border-radius: 12px; text-decoration: none; margin-bottom: 10px; font-weight: bold; transition: 0.2s; }
+        .ad-item { border-right: 5px solid var(--tg); background: rgba(0,136,204,0.06); padding: 12px; border-radius: 10px; margin-bottom: 10px; font-size: 0.9rem; line-height: 1.5; }
+        .ad-meta { font-size: 0.7rem; color: #888; margin-bottom: 5px; display: block; font-weight: bold; }
+
+        .shortcuts-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 12px; scrollbar-width: none; }
+        .shortcut-item { background: var(--p); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.75rem; white-space: nowrap; text-decoration: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        
+        .row-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f1f1; align-items: center; font-size: 0.9rem; }
+        .btn-link { background: var(--a); color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 0.8rem; font-weight: bold; }
+        .btn-copy { background: #f0f0f0; border: none; padding: 8px; border-radius: 8px; color: #555; cursor: pointer; }
+
+        .tg-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--tg); color: white; padding: 12px; border-radius: 12px; text-decoration: none; margin-bottom: 8px; font-size: 0.9rem; font-weight: bold; transition: 0.2s; }
         .tg-btn:active { transform: scale(0.98); }
         
-        .sub-tags { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 10px; scrollbar-width: none; }
-        .tag { background: #eee; padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; white-space: nowrap; cursor: pointer; border: none; }
-        
-        .calc-box { background: #f9f9f9; padding: 15px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 10px; }
-        input, textarea { padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px; width: 100%; box-sizing: border-box; font-family: inherit; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 10px; background: var(--card); color: var(--txt); box-sizing: border-box; }
+        .motivate { color: var(--a); font-weight: bold; font-size: 0.8rem; text-align: center; display: block; margin-top: 8px; }
+        .main-btn { width: 100%; background: var(--a); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; }
     </style>
 </head>
 <body>
 
+    <section class="hero">
+        <button class="dark-toggle" onclick="toggleDark()"><i class="fas fa-moon"></i></button>
+        <img src="https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg" class="logo-img" onerror="this.src='https://via.placeholder.com/80?text=Oxygen'">
+        <h3 style="margin:0;">Oxygen | أوكسجين</h3>
+        <div class="quote">"لأنك أوكسجين الحياة لمرضاك، ادرس اليوم لتنقذهم غداً 😂✨"</div>
+    </section>
+
     <div id="home" class="page active">
-        <section class="hero">
-            <img src="https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg" class="logo-img">
-            <h3 style="margin:0;">منصة ملائكة الرحمة</h3>
-            <p style="font-size: 0.8rem; opacity: 0.9;">بإشراف: مصطفى جبار</p>
-        </section>
-        
-        <div class="card" style="margin-top: -20px; border-right: 5px solid #e74c3c; background: #fff5f5;">
-            <h4 style="margin:0; color:#e74c3c;"><i class="fas fa-bullhorn"></i> تبليغ هام</h4>
-            <p style="font-weight: bold; margin: 5px 0;">" شدوا حيلكم الاسبوع الجاي عباره عن امتحانات "</p>
-        </div>
-
         <div class="card">
-            <h4><i class="fas fa-edit"></i> مفكرة الممرض (ملاحظاتك)</h4>
-            <textarea id="userNote" rows="4" placeholder="اكتب مهامك الدراسية أو نواقصك هنا..."></textarea>
-            <button onclick="saveNote()" style="width:100%; background:var(--a); color:white; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer;">حفظ في الذاكرة ✅</button>
+            <h5 style="margin:0 0 12px 0;"><i class="fas fa-calendar-alt"></i> جدول الممرضين الأسبوعي</h5>
+            <div id="schedule-grid" class="schedule-grid">جاري تحميل الجدول...</div>
         </div>
-
         <div class="card">
-            <h4>👨‍💻 المطور</h4>
-            <a href="https://t.me/ms0oll" class="tg-btn" style="background: var(--p);">
-                <i class="fas fa-user"></i> تواصل مع مصطفى جبار
-            </a>
+            <h5 style="margin:0 0 12px 0;"><i class="fas fa-feather-alt"></i> مفكرة مصطفى جبار</h5>
+            <textarea id="userNote" rows="3" placeholder="سجل ملاحظاتك المهمة هنا..."></textarea>
+            <button class="main-btn" onclick="saveNote()">حفظ الملاحظة ✅</button>
         </div>
+    </div>
+
+    <div id="ads" class="page">
+        <h3>📢 تبليغات الممرضين العامة</h3>
+        <div id="ads-feed">جاري التحميل...</div>
     </div>
 
     <div id="lectures" class="page">
-        <h3>📚 المحاضرات</h3>
-        <div class="sub-tags" id="subTags"></div>
+        <h3>📚 أرشيف المحاضرات</h3>
+        <div id="shortcuts-list" class="shortcuts-bar"></div>
         <div id="lecturesList">جاري التحميل...</div>
     </div>
 
-    <div id="exams" class="page">
-        <h3>📝 جدول الامتحانات</h3>
-        <div id="examsList">جاري التحميل...</div>
+    <div id="group5" class="page">
+        <h3>👥 مهام المجموعة 5</h3>
+        <div id="g5-feed">جاري التحميل...</div>
+        <a href="https://t.me/txt7ll" target="_blank" class="tg-btn" style="background:#e67e22;"><i class="fas fa-bullhorn"></i> قناة المجموعة 5 الرسمية</a>
     </div>
 
-    <div id="calculator" class="page">
-        <h3>🧮 الحاسبة (40+60)</h3>
+    <div id="tools" class="page">
+        <h3>🛠️ الأدوات والإدارة</h3>
         <div class="card">
-            <div id="subjectsList">
-                <div class="calc-box">
-                    <input type="text" placeholder="اسم المادة" style="font-weight:bold;">
-                    <div style="display:flex; gap:5px;">
-                        <input type="number" placeholder="نظري(25)" class="nt">
-                        <input type="number" placeholder="عملي(10)" class="pr">
-                        <input type="number" placeholder="يومي(5)" class="dy">
-                    </div>
-                    <input type="number" placeholder="درجة الفاينل (60)" class="fn" style="border:1.5px solid var(--a)">
-                    <p class="res-badge" style="text-align:center; font-weight:bold; color:var(--p); margin:0;"></p>
-                </div>
+            <h5>🧮 حاسبة النجاح (40/60)</h5>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+                <input type="number" id="nt" placeholder="نظري">
+                <input type="number" id="pr" placeholder="عملي">
             </div>
-            <button onclick="addNewSubject()" style="background:none; border:1px dashed #aaa; width:100%; padding:10px; border-radius:10px; margin-bottom:10px;">+ مادة إضافية</button>
-            <button onclick="calculateAll()" style="width:100%; background:var(--p); color:white; border:none; padding:15px; border-radius:12px; font-weight:bold;">احسب النتيجة</button>
-            <div id="finalRes" style="display:none; text-align:center; margin-top:15px;">
-                <h1 id="gpaVal" style="color:var(--a); margin:0;">0%</h1>
-                <p id="gpaStatus"></p>
+            <input type="number" id="dy" placeholder="يومي">
+            <input type="number" id="fn" placeholder="الفاينل">
+            <button class="main-btn" onclick="calcSuccess()" style="background:var(--p);">احسب الدرجة</button>
+            <div id="resBox" style="display:none; margin-top:10px; padding:12px; border-radius:10px; background:rgba(39, 174, 96, 0.1); text-align:center;">
+                <p id="totalRes" style="margin:0; font-weight:bold; font-size:1.1rem;"></p>
+                <p id="neededRes" style="margin:5px 0 0 0; color:#e74c3c; font-size:0.85rem;"></p>
             </div>
+            <span class="motivate">تذكر: النجاح ليس صدفة، بل هو عمل مستمر! 🔥</span>
         </div>
-    </div>
-
-    <div id="settings" class="page">
-        <h3>🔗 القنوات والجروبات</h3>
         
-        <div class="card" style="border-right: 5px solid var(--a);">
-            <h4 style="color:var(--a);">🔝 الجروبات الرسمية للمرحلة</h4>
-            <a href="https://t.me/+qlol3SKFZpk0ZDli" target="_blank" class="tg-btn"><i class="fab fa-telegram"></i> الجروب الرسمي - المرحلة الأولى</a>
-            <a href="https://t.me/+5gRfqqpnkzwzODJi" target="_blank" class="tg-btn" style="background:#2ecc71;"><i class="fas fa-dna"></i> جروب مادة الأحياء الرسمي</a>
+        <div class="card">
+            <h5 style="margin:0 0 12px 0;"><i class="fas fa-user-shield"></i> تواصل مع الإدارة</h5>
+            <div id="admin-links">جاري التحميل...</div>
         </div>
 
         <div class="card">
-            <h4>📁 التبليغات والملفات</h4>
-            <a href="https://t.me/alialakbar2005" target="_blank" class="tg-btn" style="background:#6c757d;"><i class="fas fa-folder-open"></i> جروب الملفات (الممرضين)</a>
-            <a href="https://t.me/txt7ll" target="_blank" class="tg-btn" style="background:#e67e22;"><i class="fas fa-bullhorn"></i> تبليغات المجموعة الخامسة</a>
-        </div>
-
-        <div class="card">
-            <h4>🛠️ إعدادات التطبيق</h4>
-            <button onclick="document.body.classList.toggle('dark')" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd; background:none; color:inherit; cursor:pointer;">تبديل الوضع الليلي 🌙</button>
+            <a href="https://t.me/+qlol3SKFZpk0ZDli" target="_blank" class="tg-btn"><i class="fab fa-telegram"></i> جروب المرحلة الأولى</a>
+            <a href="https://t.me/+5gRfqqpnkzwzODJi" target="_blank" class="tg-btn" style="background:#27ae60;"><i class="fas fa-dna"></i> جروب الأحياء الرسمي</a>
+            <a href="https://t.me/alialakbar2005" target="_blank" class="tg-btn" style="background:#6c757d;"><i class="fas fa-file-medical"></i> قناة الملفات والمحاضرات</a>
         </div>
     </div>
 
     <nav class="nav-bar">
         <button class="nav-item active" onclick="showPage('home')"><i class="fas fa-home"></i>الرئيسية</button>
-        <button class="nav-item" onclick="showPage('lectures')"><i class="fas fa-book"></i>المحاضرات</button>
-        <button class="nav-item" onclick="showPage('exams')"><i class="fas fa-calendar-alt"></i>الامتحانات</button>
-        <button class="nav-item" onclick="showPage('calculator')"><i class="fas fa-calculator"></i>المعدل</button>
-        <button class="nav-item" onclick="showPage('settings')"><i class="fas fa-link"></i>القنوات</button>
+        <button class="nav-item" onclick="showPage('ads')"><i class="fas fa-bullhorn"></i>إعلانات</button>
+        <button class="nav-item" onclick="showPage('lectures')"><i class="fas fa-book-open"></i>محاضرات</button>
+        <button class="nav-item" onclick="showPage('group5')"><i class="fas fa-users"></i>جروب 5</button>
+        <button class="nav-item" onclick="showPage('tools')"><i class="fas fa-tools"></i>أدوات</button>
     </nav>
 
     <script>
         const sheetID = "1_fAReJybGj_tZ80LslShuLnERAAliJXqhEhNtsk_pGg";
 
-        const subjectIcons = {
-            "تشريح": "https://i.postimg.cc/90RGZ3vm/Ilustración_Médica_Del_Cráneo_Y_El_Sistema_Vascular_PNG_dibujos_Cráneo_Anatómico_Anatomية_الحمراء.jpg",
-            "كيمياء": "https://i.postimg.cc/ydrmD6rg/download-4.jpg",
-            "اسس تمريض": "https://i.postimg.cc/CL52rzVv/download-3.jpg",
-            "أخرى": "https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg"
-        };
+        function toggleDark() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('oxDarkMode', document.body.classList.contains('dark-mode'));
+        }
+        if(localStorage.getItem('oxDarkMode') === 'true') toggleDark();
 
         function showPage(p) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(ni => ni.classList.remove('active'));
             document.getElementById(p).classList.add('active');
             event.currentTarget.classList.add('active');
             window.scrollTo(0,0);
         }
 
-        // حفظ الملاحظات
-        function saveNote() {
-            localStorage.setItem('nurseNote', document.getElementById('userNote').value);
-            alert("تم حفظ ملاحظاتك بنجاح ✅");
-        }
-        document.getElementById('userNote').value = localStorage.getItem('nurseNote') || "";
-
         async function init() {
             try {
-                const [rLec, rEx] = await Promise.all([
+                const [rLec, rUpd, rSch] = await Promise.all([
                     fetch(`https://opensheet.elk.sh/${sheetID}/ورقة1`),
-                    fetch(`https://opensheet.elk.sh/${sheetID}/exams`)
+                    fetch(`https://opensheet.elk.sh/${sheetID}/updates`),
+                    fetch(`https://opensheet.elk.sh/${sheetID}/schedule`)
                 ]);
+                
+                const updatesData = await rUpd.json();
+                renderFeed(updatesData);
+                renderAdmins(updatesData);
+                renderSchedule(await rSch.json());
                 renderLecs(await rLec.json());
-                renderExams(await rEx.json());
-            } catch(e) { console.error("Data Error"); }
+            } catch(e) { console.error("Connection Error"); }
+        }
+
+        function renderFeed(data) {
+            const adsFeed = document.getElementById('ads-feed');
+            const g5Feed = document.getElementById('g5-feed');
+            adsFeed.innerHTML = ""; g5Feed.innerHTML = "";
+            data.forEach((row, i) => {
+                let gen = row.general_news || Object.values(row)[0];
+                let g5 = row.group5_tasks || Object.values(row)[1];
+                if(gen) adsFeed.innerHTML += `<div class="ad-item"><span class="ad-meta">تبليغ #${data.length - i}</span>${gen}</div>`;
+                if(g5) g5Feed.innerHTML += `<div class="ad-item" style="border-right-color:#e67e22;"><span class="ad-meta">تنبيه لجروب 5</span>${g5}</div>`;
+            });
+        }
+
+        function renderAdmins(data) {
+            const container = document.getElementById('admin-links');
+            container.innerHTML = "";
+            data.forEach(row => {
+                const val = Object.values(row);
+                if(val[2] && val[3] && val[2].includes('http')) {
+                    container.innerHTML += `<a href="${val[2]}" target="_blank" class="tg-btn" style="background:#34495e;"><i class="fas fa-user-md"></i> ${val[3]}</a>`;
+                }
+            });
+        }
+
+        function renderSchedule(data) {
+            const container = document.getElementById('schedule-grid');
+            container.innerHTML = "";
+            const grouped = data.reduce((acc, row) => {
+                let day = row.اليوم || row["اليوم"];
+                if(!acc[day]) acc[day] = [];
+                acc[day].push(row); return acc;
+            }, {});
+
+            for(const day in grouped) {
+                if(day === "undefined") continue;
+                let html = `<div class="day-mini-card"><span class="day-n">${day}</span>`;
+                grouped[day].forEach(item => {
+                    let timeVal = item.الوقت || item[" الوقت"] || "غير محدد";
+                    html += `<div style="font-size:0.8rem; margin-bottom:8px; border-bottom:1px solid rgba(0,0,0,0.05);">
+                        <div style="font-weight:bold; color:var(--p);">${item.المادة}</div>
+                        <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:#888;">
+                            <span><i class="far fa-clock"></i> ${timeVal}</span><span>${item.القاعة || ''}</span>
+                        </div>
+                    </div>`;
+                });
+                container.innerHTML += html + `</div>`;
+            }
         }
 
         function renderLecs(data) {
             const list = document.getElementById("lecturesList");
-            const tags = document.getElementById("subTags");
-            list.innerHTML = ""; tags.innerHTML = "";
+            const shortcuts = document.getElementById("shortcuts-list");
+            list.innerHTML = ""; shortcuts.innerHTML = "";
             const grouped = data.reduce((acc, row) => {
                 const s = row.المادة || "أخرى";
                 if (!acc[s]) acc[s] = [];
@@ -185,74 +244,34 @@
             }, {});
 
             for (const sub in grouped) {
-                const tag = document.createElement("button");
-                tag.className = "tag"; tag.innerText = sub;
-                tag.onclick = () => document.getElementById('sec-'+sub).scrollIntoView({behavior:"smooth"});
-                tags.appendChild(tag);
-
-                const icon = subjectIcons[sub] || subjectIcons["أخرى"];
-                let html = `<div class="card" id="sec-${sub}">
-                    <div class="section-header"><img src="${icon}" class="sub-icon-img"><b>${sub}</b></div>`;
+                const subID = "sub-" + sub.replace(/\s+/g, '-');
+                shortcuts.innerHTML += `<a href="#${subID}" class="shortcut-item">${sub}</a>`;
+                let html = `<div class="card" id="${subID}"><div style="background:var(--p); color:white; padding:10px; border-radius:10px; font-weight:bold; margin-bottom:10px; font-size:0.95rem;">${sub}</div>`;
                 grouped[sub].forEach(l => {
-                    html += `<div class="row-item">
-                        <span style="flex:1;">${l.المحاضرة}</span>
-                        <div style="display:flex; gap:5px;">
-                            <button class="btn-copy" onclick="copyLink('${l.الموقع}')" title="نسخ الرابط"><i class="fas fa-share-alt"></i></button>
-                            <a href="${l.الموقع}" target="_blank" class="btn-link">فتح</a>
-                        </div>
-                    </div>`;
+                    html += `<div class="row-item"><span>${l.المحاضرة}</span><div style="display:flex; gap:8px;"><button class="btn-copy" onclick="copyLink('${l.الموقع}')"><i class="fas fa-copy"></i></button><a href="${l.الموقع}" target="_blank" class="btn-link">فتح</a></div></div>`;
                 });
                 list.innerHTML += html + "</div>";
             }
         }
 
-        function copyLink(url) {
-            navigator.clipboard.writeText(url).then(() => {
-                alert("تم نسخ رابط المحاضرة بنجاح 🔗");
-            });
-        }
-
-        function renderExams(data) {
-            const list = document.getElementById("examsList");
-            list.innerHTML = "";
-            data.forEach(ex => {
-                const icon = subjectIcons[ex.المادة] || subjectIcons["أخرى"];
-                list.innerHTML += `<div class="card" style="border-right:5px solid var(--p)">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <img src="${icon}" style="width:25px; height:25px; border-radius:50%;">
-                        <b>${ex.المادة}</b>
-                    </div>
-                    <small>📅 التاريخ: ${ex.التاريخ} | النوع: ${ex['نوع الامتحان']}</small>
-                </div>`;
-            });
-        }
-
-        function addNewSubject() {
-            const box = document.querySelector('.calc-box').cloneNode(true);
-            box.querySelectorAll('input').forEach(i => i.value = "");
-            box.querySelector('.res-badge').innerText = "";
-            document.getElementById('subjectsList').appendChild(box);
-        }
-
-        function calculateAll() {
-            let total = 0, count = 0;
-            document.querySelectorAll('.calc-box').forEach(box => {
-                const nt = parseFloat(box.querySelector('.nt').value) || 0;
-                const pr = parseFloat(box.querySelector('.pr').value) || 0;
-                const dy = parseFloat(box.querySelector('.dy').value) || 0;
-                const fn = parseFloat(box.querySelector('.fn').value) || 0;
-                const sum = nt + pr + dy + fn;
-                box.querySelector('.res-badge').innerText = `المجموع الكلي: ${sum}/100`;
-                if((nt+pr+dy) > 0 || fn > 0) { total += sum; count++; }
-            });
-            if(count > 0) {
-                const gpa = (total / count).toFixed(2);
-                document.getElementById('finalRes').style.display = 'block';
-                document.getElementById('gpaVal').innerText = gpa + "%";
-                document.getElementById('gpaStatus').innerText = gpa >= 50 ? "ناجح ✨" : "راسب ❌";
+        function saveNote() { localStorage.setItem('oxNote', document.getElementById('userNote').value); alert("تم حفظ ملاحظتك بنجاح ✅"); }
+        document.getElementById('userNote').value = localStorage.getItem('oxNote') || "";
+        function copyLink(url) { navigator.clipboard.writeText(url).then(() => alert("تم نسخ الرابط! 🔗")); }
+        
+        function calcSuccess() {
+            const s1 = (parseFloat(document.getElementById('nt').value)||0) + (parseFloat(document.getElementById('pr').value)||0) + (parseFloat(document.getElementById('dy').value)||0);
+            const fn = document.getElementById('fn').value;
+            document.getElementById('resBox').style.display = 'block';
+            if(fn === "") {
+                const needed = 50 - s1;
+                document.getElementById('totalRes').innerText = `سعيك الحالي: ${s1.toFixed(1)} / 40`;
+                document.getElementById('neededRes').innerText = needed > 0 ? `تحتاج ${needed.toFixed(1)} في الفاينل للنجاح.` : "أنت ناجح بالسعي! 🔥";
+            } else {
+                const total = s1 + parseFloat(fn);
+                document.getElementById('totalRes').innerText = `المجموع: ${total.toFixed(1)} %`;
+                document.getElementById('neededRes').innerText = total >= 50 ? "النتيجة: ناجح ✨" : "النتيجة: راسب ❌";
             }
         }
-
         init();
     </script>
 </body>
