@@ -11,12 +11,15 @@
     <meta name="theme-color" content="#2c3e50">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/CL52rzVc/a2043f1739b2da955eba5a2c1bbd0bb3.jpg">
 
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-      window.OneSignal = window.OneSignal || [];
-      OneSignal.push(function() {
-        OneSignal.init({
-          appId: "c203fd64-b856-407e-a1b4-1212f35b76d6",
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "c203fd64-b856-407e-a1b4-1212f35b76d6",
+    });
+  });
+</script>
           notifyButton: { 
             enable: true,
             size: 'medium',
@@ -277,5 +280,6 @@
 </body>
 
 </html>
+
 
 
